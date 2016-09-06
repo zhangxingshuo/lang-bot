@@ -1,4 +1,5 @@
 import tweepy
+from datetime import datetime
 
 from keys import *
 
@@ -7,6 +8,8 @@ auth.set_access_token(accessToken, accessTokenSecret)
 
 api = tweepy.API(auth)
 
-tweet = "Just doing some testing, don't mind me..."
+date = str(datetime.now())
+
+tweet = "The current time is " + date
 
 api.update_status(tweet)
