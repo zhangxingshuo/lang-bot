@@ -8,8 +8,6 @@ auth.set_access_token(accessToken, accessTokenSecret)
 
 api = tweepy.API(auth)
 
-date = str(datetime.now())
-
-tweet = "The current time is " + date
-
-api.update_status(tweet)
+for i in range(1,11):
+    tweet = "Counting to ten: " + i
+    api.update_status(tweet)
