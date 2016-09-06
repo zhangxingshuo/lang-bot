@@ -3,7 +3,7 @@ from datetime import datetime
 
 from keys import *
 
-auth = tweepy.OAuthHandler(consumerKey, consumerKeySecret)
+auth = tweepy.OAuthHandler(consumerKey, consumerKeySecret, secure=True)
 auth.set_access_token(accessToken, accessTokenSecret)
 
 api = tweepy.API(auth)
