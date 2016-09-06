@@ -1,1 +1,1 @@
-web: python HelloWorld.py
+web: python -W ignore HelloWorld.py

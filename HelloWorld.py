@@ -9,5 +9,5 @@ auth.set_access_token(accessToken, accessTokenSecret)
 api = tweepy.API(auth)
 
 for i in range(1,11):
-    tweet = "Counting to ten: " + i
+    tweet = "Counting to ten (again): " + str(i)
     api.update_status(tweet)
