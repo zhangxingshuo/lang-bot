@@ -36,3 +36,4 @@ while True:
     if isPrime(n):
         tweet = "Probably prime: %d" % n
         api.update_status(tweet)
+    n += 1
