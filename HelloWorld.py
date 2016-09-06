@@ -12,4 +12,4 @@ time = str(datetime.now())
 
 tweet = 'The time is currently ' + time
 
-api.me(tweet)
+api.update_status(tweet)
