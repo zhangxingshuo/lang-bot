@@ -10,6 +10,6 @@ api = tweepy.API(auth)
 
 markov = Markov('tale_two_cities.txt')
 
-tweet = markov.generate_text[:140]
+tweet = markov.generate_text()[:140]
 
 api.update_status(tweet)
