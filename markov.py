@@ -17,15 +17,13 @@ import sys
 
 class Markov(object):
 
-    def __init__(self, filenames, order=2):
+    def __init__(self, filename, order=2):
         '''
         Creates Markov object based on corpus. Default order is 2.
         '''
         self.cache = {}
         self.word_list = []
-        for filename in filenames:
-            print("Reading %s..." % filename)
-            self.word_list.extend(self.parse_file(filename))
+        self.word_list.extend(self.parse_file(filename))
         self.order = order
         self.create_dictionary()
 
@@ -79,6 +77,6 @@ class Markov(object):
         return ' '.join(gen_words)   
 
 if __name__ == '__main__':
-    filenames = sys.argv[1:]
-    markov = Markov(filenames)
+    filename = sys.argv[1]
+    markov = Markov(filename)
     print(markov.generate_text())

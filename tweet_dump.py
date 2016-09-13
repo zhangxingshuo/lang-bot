@@ -14,7 +14,7 @@ import sys
 from keys import *
 
 def get_user_tweets(user):
-    print('Fetching tweets from %s...' % user)
+    print('Fetching tweets from @%s...' % user)
 
     auth = tweepy.OAuthHandler(consumerKey, consumerKeySecret)
     auth.set_access_token(accessToken, accessTokenSecret)
