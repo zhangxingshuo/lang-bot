@@ -1,11 +1,11 @@
 '''
 Tweet Dumper
 ============
-Gets the most recent 3,200 tweets from specified user.
+Gets the most recent 3,200 tweets from specified users and writes to file.
 
 Usage:
 ------
-    python3 tweet_dump.py [<twitter username>]
+    python3 tweet_dump.py [<twitter username>] ...
 '''
 
 import tweepy
@@ -13,7 +13,9 @@ import sys
 
 from keys import *
 
-def get_tweets(user):
+def get_user_tweets(user):
+    print('Fetching tweets from %s...' % user)
+
     auth = tweepy.OAuthHandler(consumerKey, consumerKeySecret)
     auth.set_access_token(accessToken, accessTokenSecret)
 
@@ -35,7 +37,12 @@ def get_tweets(user):
     return [(tweet.created_at, tweet.text) for tweet in all_tweets]
 
 if __name__ == '__main__':
-    tweets = get_tweets(sys.argv[1])
+    tweets = get_user_tweets(sys.argv[1])
 
     for (time, tweet) in tweets:
         print("%s : %s" %(time, tweet))
+
+    file = open(sys.argv[1] + '.txt', 'w')
+    for (time, tweet) in tweets:
+        file.write(tweet + '\n')
+    file.close()

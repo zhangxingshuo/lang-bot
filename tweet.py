@@ -12,7 +12,8 @@ import tweepy
 import sys
 
 from keys import *
-from markov import Markov
+# from markov import Markov
+import markovify
 
 def tweet(filename):
     auth = tweepy.OAuthHandler(consumerKey, consumerKeySecret)
@@ -20,17 +21,24 @@ def tweet(filename):
 
     api = tweepy.API(auth)
 
-    markov = Markov(filename)
+    # markov = Markov(filename)
 
-    text = markov.generate_text().split()
+    # text = markov.generate_text().split()
 
-    tweet = ''
+    # tweet = ''
 
-    index = 0
+    # index = 0
 
-    while len(tweet + text[index] + ' ') <= 140:
-        tweet += text[index] + ' '
-        index += 1
+    # while len(tweet + text[index] + ' ') <= 140:
+    #     tweet += text[index] + ' '
+    #     index += 1
+
+    with open(filename) as f:
+        text = f.read()
+
+    text_model = markovify.Text(text)
+
+    tweet = text_model.make_short_sentence(140)
 
     api.update_status(tweet)
 
