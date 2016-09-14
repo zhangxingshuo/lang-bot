@@ -39,10 +39,7 @@ def get_user_tweets(user):
 if __name__ == '__main__':
     tweets = get_user_tweets(sys.argv[1])
 
-    for (time, tweet) in tweets:
-        print("%s : %s" %(time, tweet))
-
-    file = open(sys.argv[1] + '.txt', 'w')
-    for (time, tweet) in tweets:
+    file = open(sys.argv[1] + '.txt', 'w+')
+    for _,tweet in tweets:
         file.write(tweet + '\n')
     file.close()

@@ -14,6 +14,9 @@ import sys
 from markov import Markov
 
 def generate_text(filename):
+    '''
+    Using python markovify package
+    '''
     with open(filename) as f:
         text = f.read()
 

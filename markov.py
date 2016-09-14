@@ -43,7 +43,7 @@ class Markov(object):
 
     def group_words(self):
         '''
-        Groups words based on the order of Markov chain
+        Groups words into n-grams based on Markov order
         '''
         if len(self.word_list) < self.order:
             return
@@ -52,7 +52,7 @@ class Markov(object):
 
     def create_dictionary(self):
         '''
-        Creates dictionary of grouped words and next words
+        Creates dictionary of n-grams and the word immediately after
         '''
         for words in self.group_words():
             key = tuple(words[:-1])
@@ -74,9 +74,4 @@ class Markov(object):
             gen_words.append(words[0])
             words = words[1:]
             words.append(random.choice(self.cache[tuple(words)]))
-        return ' '.join(gen_words)   
-
-if __name__ == '__main__':
-    filename = sys.argv[1]
-    markov = Markov(filename)
-    print(markov.generate_text())
+        return ' '.join(gen_words)
