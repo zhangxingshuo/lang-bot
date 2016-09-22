@@ -13,22 +13,16 @@ import sys
 
 from markov import Markov
 
-def generate_text(filenames):
+def generate_text(filename):
     '''
     Using python markovify package
     '''
-    text_models = []
+    with open(filename) as f:
+        text = f.read()
 
-    for filename in filenames:
+    text_model = markovify.Text(text)
 
-        with open(filename) as f:
-            text = f.read()
-
-        text_models.append(markovify.Text(text))
-
-    total_model = markovify.combine(text_models)
-
-    return total_model.make_short_sentence(140)
+    return text_model.make_short_sentence(140)
 
 def markov_generate_text(filename):
     '''
