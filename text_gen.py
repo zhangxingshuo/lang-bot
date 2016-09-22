@@ -11,7 +11,7 @@ Usage:
 import markovify
 import sys
 
-from markov import Markov
+# from markov import Markov
 
 def generate_text(filename):
     '''
