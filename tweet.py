@@ -14,7 +14,7 @@ import sys
 from keys import *
 from markov import Markov
 
-from text_gen import generate_text
+from text_gen import *
 
 def tweet(filename):
     auth = tweepy.OAuthHandler(consumerKey, consumerKeySecret)
@@ -22,7 +22,7 @@ def tweet(filename):
 
     api = tweepy.API(auth)
 
-    tweet = generate_text(filename)
+    tweet = markov_generate_text(filename)
 
     api.update_status(tweet)
 

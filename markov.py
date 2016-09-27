@@ -115,15 +115,39 @@ class Markov(object):
             if rnd < total:
                 return choices[i]
 
-    def generate_text(self, length=50):
+    def get_overlap(self, string):
         '''
-        Generates random text based on dictionary
+        Get length of maximum string overlap
         '''
-        state = (BEGIN,) * self.order
-        next_word = self.move(state)
-        text = ''
-        while next_word != END:
-            text += next_word + ' '
-            state = tuple(state[1:]) + (next_word,)
+        sanitized_corpus = re.sub(r'\W+', '', self.text).lower()
+        sanitized_string = re.sub(r'\W+', '', string).lower()
+        max_overlap = 0
+        for start in range(len(sanitized_string) - 1):
+            for end in range(start, len(sanitized_string)):
+                substring = sanitized_string[start:end]
+                if end - start > max_overlap:
+                    if substring in sanitized_corpus:
+                        max_overlap = end - start
+        return max_overlap/len(sanitized_string)
+
+    def generate_text(self, min_length=20, max_overlap_ratio=0.7, max_length=140, num_tries=10):
+        '''
+        Generates random text based on dictionary. Text must not overlap original text by more
+        than 70%, and text must be greater than 20 chars and less than 140 chars (default).
+        '''
+        for _ in range(num_tries):
+
+            state = (BEGIN,) * self.order
             next_word = self.move(state)
-        return text[:-1]
+            text = ''
+            while next_word != END:
+                text += next_word + ' '
+                state = tuple(state[1:]) + (next_word,)
+                next_word = self.move(state)
+
+            result = text[:-1]
+            if len(result) <= max_length and len(result) > min_length:
+                if self.get_overlap(result) < max_overlap_ratio:
+                    return result
+                    
+        return None

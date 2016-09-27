@@ -11,7 +11,7 @@ Usage:
 import markovify
 import sys
 
-# from markov import Markov
+from markov import Markov
 
 def generate_text(filename):
     '''
@@ -29,17 +29,11 @@ def markov_generate_text(filename):
     My method of markov chain text generation
     '''
     markov = Markov(filename)
-    raw_text = markov.generate_text().split()
-
-    text = ''
-    index = 0
-
-    while len(text + raw_text[index] + ' ') <= 140:
-        text += raw_text[index] + ' '
-        index += 1
-
-    return text
+    result = None
+    while result is None:
+        result = markov.generate_text()
+    return result
 
 if __name__ == '__main__':
-    filenames = sys.argv[1:]
-    print(generate_text(filenames))
+    filename = sys.argv[1]
+    print(markov_generate_text(filename))
