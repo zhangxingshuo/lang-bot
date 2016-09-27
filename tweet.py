@@ -12,7 +12,7 @@ import tweepy
 import sys
 
 from keys import *
-# from markov import Markov
+from markov import Markov
 
 from text_gen import generate_text
 
